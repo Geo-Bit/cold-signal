@@ -5,6 +5,8 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Outpost Noctua</title>
 
+  <link href="https://fonts.googleapis.com/css2?family=Major+Mono+Display&family=Oswald:wght@200..700&display=swap" rel="stylesheet">
+
   <style>
     html, body {
       margin: 0;
@@ -21,20 +23,63 @@
       height: 100vh;
       object-fit: cover;
       z-index: -1;
-      filter: brightness(0.9); /* optional mood tweak */
+      filter: brightness(0.9);
     }
 
-    /* Content container */
     .content {
       position: relative;
       z-index: 10;
       color: white;
-      font-family: monospace;
+      font-family: "Oswald", sans-serif;
+      font-optical-sizing: auto;
+      font-style: normal;
       text-align: center;
       margin-top: 40vh;
     }
+
+    /* Terminal-style code block */
+    .code-block {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      padding: 15px 25px;
+      background: rgba(0, 0, 0, 0.45);
+      border: 1px solid rgba(255, 255, 255, 0.35);
+      border-radius: 6px;
+      font-family: monospace;
+      font-size: 1rem;
+      line-height: 1.4rem;
+      color: #00ffcc;
+      text-shadow: 0 0 6px rgba(0,255,200,0.5);
+      backdrop-filter: blur(2px);
+      white-space: nowrap;
+    }
+
+    .code-label {
+      color: #a0a0a0;
+      font-size: 0.85rem;
+      margin-bottom: 6px;
+      display: block;
+    }
+
+    /* Copy button styling */
+    #copy-btn {
+      font-size: 1.1rem;
+      background: none;
+      border: none;
+      cursor: pointer;
+      color: #00ffcc;
+      text-shadow: 0 0 6px rgba(0,255,200,0.5);
+      padding: 0;
+    }
+
+    #copy-btn:hover {
+      color: #ffffff;
+      text-shadow: 0 0 8px rgba(255,255,255,0.6);
+    }
   </style>
 </head>
+
 <body>
 
   <video id="bg-video" autoplay muted loop playsinline>
@@ -43,8 +88,24 @@
 
   <div class="content">
     <h1>COLD SIGNAL</h1>
-    <p>Coming Soon • December 2025 NoCo Hackers CTF</p>
+
+    <div class="code-block">
+      <span id="ssh-command">ssh -i ctf_key -p 2222 coldshell@34.68.126.45</span>
+      <button id="copy-btn" onclick="copySSH()">📋</button>
+    </div>
   </div>
+
+  <script>
+    function copySSH() {
+      const text = document.getElementById("ssh-command").innerText;
+
+      navigator.clipboard.writeText(text).then(() => {
+        const btn = document.getElementById("copy-btn");
+        btn.innerText = "✔";
+        setTimeout(() => btn.innerText = "📋", 1500);
+      });
+    }
+  </script>
 
 </body>
 </html>
