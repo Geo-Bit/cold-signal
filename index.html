@@ -35,6 +35,7 @@
       font-style: normal;
       text-align: center;
       margin-top: 40vh;
+      padding: 0 16px;
     }
 
     /* Terminal-style code block */
@@ -52,7 +53,8 @@
       color: #00ffcc;
       text-shadow: 0 0 6px rgba(0,255,200,0.5);
       backdrop-filter: blur(2px);
-      white-space: nowrap;
+      max-width: 90vw;
+      white-space: nowrap; /* desktop default */
     }
 
     .code-label {
@@ -71,11 +73,27 @@
       color: #00ffcc;
       text-shadow: 0 0 6px rgba(0,255,200,0.5);
       padding: 0;
+      flex-shrink: 0;
     }
 
     #copy-btn:hover {
       color: #ffffff;
       text-shadow: 0 0 8px rgba(255,255,255,0.6);
+    }
+
+    /* Mobile responsiveness */
+    @media (max-width: 600px) {
+      .content {
+        margin-top: 35vh;
+      }
+
+      .code-block {
+        font-size: 0.85rem;
+        padding: 10px 14px;
+        max-width: 92vw;
+        white-space: normal;      /* allow wrapping on small screens */
+        word-break: break-all;    /* make sure the long command doesn’t overflow */
+      }
     }
   </style>
 </head>
